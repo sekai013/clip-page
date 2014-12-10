@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title></title>
+	<script src="./js/lib/jquery-2.1.1.min.js"></script>
+	<script src="./js/lib/underscore.js"></script>
+	<script src="./js/lib/backbone.js"></script>
+	<script src="./js/lib/backbone.localStorage.js"></script>
+	<script src="./js/popup.js"></script>
+	<script src="./js/models.js"></script>
+	<script src="./js/container.js"></script>
+	<script src="./js/pageListItemView.js"></script>
+	<script src="./js/pageListView.js"></script>
+</head>
+<body>
+
+<div id="header-container"></div>
+<div id="main-container"></div>
+
+<!-- template for Backbone.View -->
+
+<script type="text/template" id="page-list-item-view-template">
+	<td>
+		<a href="./dammy.html?id=<%= id %>" target="_blank"><%= title %></a>
+	</td>
+</script>
+
+<script type="text/template" id="page-list-view-template">
+	<thead>
+		<th>Title</th>
+	</thead>
+	<tbody class="page-list-item-container"></tbody>
+</script>
+
+</body>
+</html>
+
+
