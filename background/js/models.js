@@ -1,4 +1,4 @@
-App.Page = Backbone.Model.extend({
+var Page = Backbone.Model.extend({
 	'defaults': {
 		title: '',
 		head : '',
@@ -6,7 +6,7 @@ App.Page = Backbone.Model.extend({
 	}
 });
 
-App.PageCollection = Backbone.Collection.extend({
-	model: App.Page,
+var PageCollection = Backbone.Collection.extend({
+	model: Page,
 	localStorage: new Backbone.LocalStorage('pageClip') 
 });

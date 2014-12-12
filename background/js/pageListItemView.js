@@ -1,9 +1,9 @@
-App.PageListItemView = Backbone.View.extend({
+var PageListItemView = Backbone.View.extend({
 
 	tagName: 'tr',
 
 	/*
-	model: App.Page
+	model: Page
 	 */
 
 	render: function() {

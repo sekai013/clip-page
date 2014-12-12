@@ -4,6 +4,8 @@
 	"version": "0.0.0",
 	"author": "sekai013",
 	"permissions": [
+		"contextMenus",
+		"tabs"
 	],
 	"browser_action": {
 		"default_popup": "background/popup.html",
@@ -13,8 +15,17 @@
 		},
 		"default_title": "ClipPage"
 	},
+	"content_scripts": [{
+		"matches": ["http://*/*", "file://*"],
+		"js": ["content/content.js"]
+	}],
 	"background": {
 		"scripts": [
+			"background/js/lib/jquery-2.1.1.min.js",
+			"background/js/lib/underscore.js",
+			"background/js/lib/backbone.js",
+			"background/js/lib/backbone.localStorage.js",
+			"background/js/models.js",
 			"background/js/background.js"
 		],
 		"persistent": false

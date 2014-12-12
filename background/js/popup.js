@@ -1,8 +1,6 @@
-window.App = {};
-
 $(function() {
 	function initializePages() {
-		var pageCollection = new App.PageCollection([{
+		var pageCollection = new PageCollection([{
 			title: 'Test',
 			body : 'This is test page'
 		}, {
@@ -17,20 +15,20 @@ $(function() {
 		return pageCollection.models;
 	};
 
-	App.pageCollection = new App.PageCollection();
-	App.mainContainer = new App.Container({
+	var pageCollection = new PageCollection();
+	var mainContainer = new Container({
 		el: '#main-container'
 	});
 
-	App.pageCollection.fetch().then(function(pages) {
+	pageCollection.fetch().then(function(pages) {
 		if(pages.length === 0) {
 			var models = initializePages();
-			App.pageCollection.reset(models);
+			pageCollection.reset(models);
 		}
 	});
 
-	App.pageListView = new App.PageListView({
-		pageCollection: App.pageCollection
+	var pageListView = new PageListView({
+		pageCollection: pageCollection
 	});
-	App.mainContainer.show(App.pageListView);
+	mainContainer.show(pageListView);
 });
