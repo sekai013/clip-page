@@ -1,8 +1,9 @@
 var Page = Backbone.Model.extend({
 	'defaults': {
-		title: '',
-		head : '',
-		body : ''
+		title : '',
+		head  : '',
+		links : [],
+		styles: []
 	}
 });
 

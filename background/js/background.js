@@ -19,9 +19,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 			pageCollection.fetch();
 			pageCollection.create({
-				title: request.data.title,
-				body : request.data.body,
-				head : request.data.head
+				title : request.data.title,
+				body  : request.data.body,
+				links : request.data.links,
+				styles: request.data.styles
 			});
 			pageCollection.each(function(page) {
 				page.save();
