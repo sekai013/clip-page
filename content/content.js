@@ -2,13 +2,16 @@
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var actions = {
 			clipPage: function() {
+				var title  = window.prompt('Enter title:');
+				var head   = document.getElementsByTagName('head')[0].innerHTML;
+				var body   = document.getElementsByTagName('body')[0].innerHTML;
+
 				chrome.runtime.sendMessage(chrome.runtime.id, {
 					action: 'savePage',
 					data: {
-						title: 'sample title',
-						head: document.getElementsByTagName('head')[0].innerHTML,
-						body: document.getElementsByTagName('body')[0].innerHTML,
-						srcURL: location.href
+						title : title,
+						head  : head,
+						body  : body
 					}
 				});
 			}
