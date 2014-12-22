@@ -1,4 +1,4 @@
-var PageView = Backbone.View.extend({
+App.PageView = Backbone.View.extend({
 
 	/*
 	model: Page

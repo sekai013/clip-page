@@ -25,7 +25,7 @@
 			"background/js/lib/underscore.js",
 			"background/js/lib/backbone.js",
 			"background/js/lib/backbone.localStorage.js",
-			"background/js/models.js",
+			"background/js/models_bg.js",
 			"background/js/background.js"
 		],
 		"persistent": false

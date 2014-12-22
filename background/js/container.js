@@ -1,4 +1,4 @@
-var Container = Backbone.View.extend({
+App.Container = Backbone.View.extend({
 
 	/*
 	currentView

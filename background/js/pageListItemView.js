@@ -1,4 +1,4 @@
-var PageListItemView = Backbone.View.extend({
+App.PageListItemView = Backbone.View.extend({
 
 	tagName: 'tr',
 

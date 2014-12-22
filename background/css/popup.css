@@ -1,0 +1,9 @@
+body {
+	width: 520px;
+}
+
+div#page-info {
+	position: relative;
+	top     : 0px;
+	left    : 10px;
+}

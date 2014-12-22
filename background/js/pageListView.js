@@ -1,4 +1,4 @@
-var PageListView = Backbone.View.extend({
+App.PageListView = Backbone.View.extend({
 
 	tagName: 'table',
 
@@ -14,7 +14,7 @@ var PageListView = Backbone.View.extend({
 		var $insertionPoint = this.$('.page-list-item-container');
 
 		this.pageCollection.each(function(page) {
-			var pageListItemView = new PageListItemView({
+			var pageListItemView = new App.PageListItemView({
 				model: page
 			});
 

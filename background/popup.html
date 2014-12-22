@@ -3,22 +3,73 @@
 <head>
 	<meta charset = "utf-8">
 	<title></title>
+	<link rel="stylesheet" href="./css/popup.css">
+	<link rel="stylesheet" href="./css/bootstrap.css">
 	<script src="./js/lib/jquery-2.1.1.min.js"></script>
 	<script src="./js/lib/underscore.js"></script>
 	<script src="./js/lib/backbone.js"></script>
 	<script src="./js/lib/backbone.localStorage.js"></script>
 	<script src="./js/popup.js"></script>
+	<script src="./js/tab.js"></script>
 	<script src="./js/models.js"></script>
 	<script src="./js/container.js"></script>
+	<script src="./js/router.js"></script>
+	<script src="./js/clipPageView.js"></script>
 	<script src="./js/pageListItemView.js"></script>
 	<script src="./js/pageListView.js"></script>
 </head>
 <body>
 
-<div id="header-container"></div>
+<div class="bg-primary" id="header">	
+	<div class="col-sm-6 text-left" id="tabs">
+		<a href="#clip-page" class="btn btn-default btn-sm btn-tab" id="show-clip-page">
+			このページをクリップする
+		</a>
+		<a href="#notebooks" class="btn btn-primary btn-sm btn-tab" id="show-pages">
+			ノートブック一覧
+		</a>
+	</div>
+	<div class="col-sm-6 text-right">
+		<!-- search form -->
+	</div>
+</div>
+
 <div id="main-container"></div>
 
-<!-- template for Backbone.View -->
+<!-- template for main container -->
+
+<script type="text/template" id="clip-page-view-template">
+	<div class="row">
+		<div class="col-xs-7" id="page-info">
+			<p><b><h5><%= title %></h5></b></p>
+			<p><a href="<%= url %>" target="_blank"><%= url %></a></p>
+		</div>
+		<div class="col-xs-5 text-right">
+			<button class="btn btn-default btn-sm">
+				<span class="glyphicon glyphicon-paperclip"></span>このページをクリップする
+			</button>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="notebook-list-item-view-template">
+	<td>
+		<a href="#notebooks/<%= id %>"><%= title %></a>
+	</td>
+</script>
+
+<script type="text/template" id="notebook-list-view-template">
+	<div class="text-right">
+		<button class="btn btn-default btn-sm">
+			<span class="glyphicon glyphicon-plus"></span>新しいノートブックを作成
+		</button>
+	<div>
+
+	<thead>
+		<th>ノートブック一覧</th>
+	</thead>
+	<tbody class="notebook-item-container"></tbody>
+</script>
 
 <script type="text/template" id="page-list-item-view-template">
 	<td>

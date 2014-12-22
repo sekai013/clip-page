@@ -1,6 +1,8 @@
+window.App = {};
+
 $(function() {
 	function initializePages() {
-		var pageCollection = new PageCollection([{
+		var pageCollection = new App.PageCollection([{
 			title: 'Test',
 			body : 'This is test page'
 		}, {
@@ -15,20 +17,18 @@ $(function() {
 		return pageCollection.models;
 	};
 
-	var pageCollection = new PageCollection();
-	var mainContainer = new Container({
+	App.pageCollection = new App.PageCollection();
+	App.mainContainer = new App.Container({
 		el: '#main-container'
 	});
 
-	pageCollection.fetch().then(function(pages) {
+	App.pageCollection.fetch().then(function(pages) {
 		if(pages.length === 0) {
 			var models = initializePages();
-			pageCollection.reset(models);
+			App.pageCollection.reset(models);
 		}
-	});
 
-	var pageListView = new PageListView({
-		pageCollection: pageCollection
+		App.router = new App.Router();
+		Backbone.history.start();
 	});
-	mainContainer.show(pageListView);
 });
