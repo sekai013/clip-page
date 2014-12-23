@@ -1,8 +1,8 @@
 App.Router = Backbone.Router.extend({
 	routes: {
 		'clip-page'    : 'showClipPage',
-		'notebooks/:id': 'showPages',
 		'notebooks'    : 'showNotebooks',
+		'notebooks/:id': 'showNotebookPages',
 		'*actions'     : 'defaultRoute'
 	},
 
@@ -17,7 +17,8 @@ App.Router = Backbone.Router.extend({
 			var clipPageView = new App.ClipPageView({
 				model: new App.Page({
 					title: currentTab.title,
-					url  : currentTab.url
+					url  : currentTab.url,
+					tabId: currentTab.id
 				})
 			});
 
@@ -25,15 +26,21 @@ App.Router = Backbone.Router.extend({
 		});
 	},
 
-	showPages: function() {
+	showNotebookPages: function(id) {
+		var notebook = App.notebookCollection.get(id);
 		var pageListView = new App.PageListView({
-			pageCollection: App.pageCollection
+			pages: notebook.get('pages')
 		});
 		
 		App.mainContainer.show(pageListView);
 	},
 
 	showNotebooks: function() {
+		var notebookListView = new App.NotebookListView({
+			notebookCollection: App.notebookCollection
+		});
+		
+		App.mainContainer.show(notebookListView);
 	},
 
 	defaultRoute: function() {

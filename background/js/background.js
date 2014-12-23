@@ -1,31 +1,22 @@
-chrome.runtime.onInstalled.addListener(function() {
-	chrome.contextMenus.create({
-		"title": "Clip This Page",
-		"id"   : "clipPage",
-		"contexts": ["all"]
-	});
-});
-
-var onClickHandler = function(info, tab) {
-	chrome.tabs.sendMessage(tab.id, { action: 'clipPage' });
-};
-
-chrome.contextMenus.onClicked.addListener(onClickHandler);
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	var actions = {
 		savePage: function() {
-			var pageCollection = new PageCollection();
+			var notebookCollection = new NotebookCollection();
 
-			pageCollection.fetch();
-			pageCollection.create({
+			notebookCollection.fetch();
+
+			var notebook = notebookCollection.get(request.data.notebookId);
+
+			notebook.get('pages').push({
+				index : notebook.get('pages').length,
 				title : request.data.title,
 				body  : request.data.body,
 				links : request.data.links,
-				styles: request.data.styles
+				styles: request.data.styles,
+				notebookId: request.data.notebookId
 			});
-			pageCollection.each(function(page) {
-				page.save();
+			notebookCollection.each(function(notebook) {
+				notebook.save();
 			});
 		}
 	};

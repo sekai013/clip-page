@@ -30,7 +30,8 @@
 						title : title,
 						body  : body,
 						links : links,
-						styles: styles
+						styles: styles,
+						notebookId: request.notebookId
 					}
 				});
 			}

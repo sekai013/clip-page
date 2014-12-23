@@ -1,9 +1,15 @@
 body {
-	width: 520px;
+	width: 480px;
 }
 
 div#page-info {
 	position: relative;
 	top     : 0px;
 	left    : 10px;
+}
+
+div.notebook-title-header {
+	position: relative;
+	top     : 5px;
+	left    : 0px;
 }

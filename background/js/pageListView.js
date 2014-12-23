@@ -3,19 +3,20 @@ App.PageListView = Backbone.View.extend({
 	tagName: 'table',
 
 	/*
-	 pageCollection: PageCpllection
+	 pages: array of object to create App.Page
 	 */
 
 	initialize: function(option) {
-		this.pageCollection = option.pageCollection;
+		this.pages = option.pages;
 	},
 
 	renderPage: function() {
 		var $insertionPoint = this.$('.page-list-item-container');
 
-		this.pageCollection.each(function(page) {
+		this.pages.forEach(function(page) {
+			console.log(page);
 			var pageListItemView = new App.PageListItemView({
-				model: page
+				model: new App.Page(page)
 			});
 
 			$insertionPoint.append(pageListItemView.render().$el);

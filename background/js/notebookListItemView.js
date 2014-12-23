@@ -1,14 +1,13 @@
-App.PageListItemView = Backbone.View.extend({
+App.NotebookListItemView = Backbone.View.extend({
 
 	tagName: 'tr',
 
 	/*
-	model: App.Page
+	model: App.Notebook
 	 */
 
 	render: function() {
-		console.log(this.model.toJSON());
-		var template = $('#page-list-item-view-template').html();
+		var template = $('#notebook-list-item-view-template').html();
 		var compiled = _.template(template);
 		var html = compiled(this.model.toJSON());
 
