@@ -3,6 +3,7 @@ App.Router = Backbone.Router.extend({
 		'clip-page'    : 'showClipPage',
 		'notebooks'    : 'showNotebooks',
 		'notebooks/:id': 'showNotebookPages',
+		'new-notebook' : 'showCreateNewNotebook',
 		'*actions'     : 'defaultRoute'
 	},
 
@@ -17,7 +18,7 @@ App.Router = Backbone.Router.extend({
 			var clipPageView = new App.ClipPageView({
 				model: new App.Page({
 					title  : (currentTab.title.length < 40)? currentTab.title:currentTab.url.slice(0, 40) + '...',
-					urlAbs : currentTab.url,
+					urlRaw : currentTab.url,
 					urlShow: (decodeURI(currentTab.url).length < 65)? decodeURI(currentTab.url):decodeURI(currentTab.url).slice(0, 65) + '...',
 					tabId  : currentTab.id
 				})
@@ -25,6 +26,14 @@ App.Router = Backbone.Router.extend({
 
 			App.mainContainer.show(clipPageView);
 		});
+	},
+
+	showNotebooks: function() {
+		var notebookListView = new App.NotebookListView({
+			notebookCollection: App.notebookCollection
+		});
+		
+		App.mainContainer.show(notebookListView);
 	},
 
 	showNotebookPages: function(id) {
@@ -36,12 +45,21 @@ App.Router = Backbone.Router.extend({
 		App.mainContainer.show(pageListView);
 	},
 
-	showNotebooks: function() {
-		var notebookListView = new App.NotebookListView({
-			notebookCollection: App.notebookCollection
+	showCreateNewNotebook: function() {
+		var newNotebookView = new App.NewNotebookView();
+
+		newNotebookView.on('submit:form', function(attributes) {
+			var newNotebook = new App.Notebook({
+				title: attributes.title
+			});
+
+			App.notebookCollection.add(newNotebook);
+			App.notebookCollection.each(function(notebook) {
+				notebook.save();
+			});
 		});
 		
-		App.mainContainer.show(notebookListView);
+		App.mainContainer.show(newNotebookView);
 	},
 
 	defaultRoute: function() {
