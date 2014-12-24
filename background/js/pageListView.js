@@ -1,6 +1,7 @@
 App.PageListView = Backbone.View.extend({
 
-	tagName: 'table',
+	tagName  : 'table',
+	className: 'table',
 
 	/*
 	 pages: array of object to create App.Page

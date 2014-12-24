@@ -16,9 +16,10 @@ App.Router = Backbone.Router.extend({
 			var currentTab = tabs[0];
 			var clipPageView = new App.ClipPageView({
 				model: new App.Page({
-					title: currentTab.title,
-					url  : currentTab.url,
-					tabId: currentTab.id
+					title  : (currentTab.title.length < 40)? currentTab.title:currentTab.url.slice(0, 40) + '...',
+					urlAbs : currentTab.url,
+					urlShow: (decodeURI(currentTab.url).length < 65)? decodeURI(currentTab.url):decodeURI(currentTab.url).slice(0, 65) + '...',
+					tabId  : currentTab.id
 				})
 			});
 
