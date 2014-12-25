@@ -16,18 +16,25 @@ $(function() {
 	var index      = hash.index;
 	var notebookCollection = new App.NotebookCollection();
 
-	notebookCollection.fetch();
+	notebookCollection.fetch().then(function() {
+		var pageOption = notebookCollection.get(notebookId).get('pages')[index] || {
+			title: 'Error: Page Not Found!',
+			body : 'This page is not found on storage.'
+		};
+		var pageControlView = new App.PageControlView({
+			model: new App.Page(pageOption)
+		});
+		var pageView = new App.PageView({
+			model: new App.Page(pageOption)
+		});
+		var headerContainer = new App.Container({
+			el: '#header-container'
+		});
+		var bodyContainer = new App.Container({
+			el: '#body-container'
+		});
 
-	var pageOption = notebookCollection.get(notebookId).get('pages')[index] || {
-		title: 'Error: Page Not Found!',
-		body : 'This page is not found on storage.'
-	};
-	var pageView = new App.PageView({
-		model: new App.Page(pageOption)
+		headerContainer.show(pageControlView);
+		bodyContainer.show(pageView);
 	});
-	var bodyContainer = new App.Container({
-		el: '#body-container'
-	});
-
-	bodyContainer.show(pageView);
 });

@@ -23,5 +23,5 @@ var Notebook = Backbone.Model.extend({
 
 var NotebookCollection = Backbone.Collection.extend({
 	model: Notebook,
-	localStorage: new Backbone.LocalStorage('clipPage') 
+	chromeStorage: new Backbone.ChromeStorage('clipPage', 'local') 
 });

@@ -15,12 +15,24 @@ App.Router = Backbone.Router.extend({
 
 		chrome.tabs.query(query, function(tabs) {
 			var currentTab = tabs[0];
+			var title = (currentTab.title.length < 40)? currentTab.title:currentTab.url.slice(0, 40) + '...';
+			var clippable, urlRaw, urlShow;
+
+			if(currentTab.url.indexOf('chrome://') !== 0) {
+				clippable = true;
+				urlRaw  = currentTab.url;
+				urlShow = (decodeURI(currentTab.url).length < 65)? decodeURI(currentTab.url):decodeURI(currentTab.url).slice(0, 65) + '...';
+			} else {
+				clippable = false;
+			}
+
 			var clipPageView = new App.ClipPageView({
 				model: new App.Page({
-					title  : (currentTab.title.length < 40)? currentTab.title:currentTab.url.slice(0, 40) + '...',
-					urlRaw : currentTab.url,
-					urlShow: (decodeURI(currentTab.url).length < 65)? decodeURI(currentTab.url):decodeURI(currentTab.url).slice(0, 65) + '...',
-					tabId  : currentTab.id
+					title    : title,
+					clippable: clippable,
+					urlRaw   : urlRaw,
+					urlShow  : urlShow,
+					tabId    : currentTab.id
 				})
 			});
 

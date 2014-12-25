@@ -16,7 +16,7 @@
 		"default_title": "ClipPage"
 	},
 	"content_scripts": [{
-		"matches": ["http://*/*", "file://*"],
+		"matches": ["<all_urls>"],
 		"js": ["content/content.js"]
 	}],
 	"background": {
@@ -24,7 +24,7 @@
 			"background/js/lib/jquery-2.1.1.min.js",
 			"background/js/lib/underscore.js",
 			"background/js/lib/backbone.js",
-			"background/js/lib/backbone.localStorage.js",
+			"background/js/lib/backbone.chromeStorage.min.js",
 			"background/js/bgModels.js",
 			"background/js/background.js"
 		],

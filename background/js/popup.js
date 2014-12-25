@@ -16,18 +16,18 @@ $(function() {
 
 		var id0 = notebookCollection.at(0).get('id');
 		var id1 = notebookCollection.at(1).get('id');
-		notebookCollection.at(0).set('pages', [new App.Page({
+		notebookCollection.at(0).set('pages', [{
 			title: 'testtitle',
 			body : 'testpage',
 			notebookId: id0,
 			index: 0
-		})]);
-		notebookCollection.at(1).set('pages', [new App.Page({
+		}]);
+		notebookCollection.at(1).set('pages', [{
 			title: 'testtitle',
 			body : 'testpage',
 			notebookId: id1,
 			index: 0
-		})]);
+		}]);
 
 		notebookCollection.each(function(notebook) {
 			notebook.save();

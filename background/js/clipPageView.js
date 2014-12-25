@@ -20,7 +20,9 @@ App.ClipPageView = Backbone.View.extend({
 
 	render: function() {
 		var template = $('#clip-page-view-template').html();
+			console.log('tes');
 		var compiled = _.template(template);
+			console.log('tes');
 		var html     = compiled(this.model.toJSON());
 
 		this.$el.append(html);

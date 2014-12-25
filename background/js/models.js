@@ -32,5 +32,5 @@ App.Notebook = Backbone.Model.extend({
 
 App.NotebookCollection = Backbone.Collection.extend({
 	model: App.Notebook,
-	localStorage: new Backbone.LocalStorage('clipPage') 
+	chromeStorage: new Backbone.ChromeStorage('clipPage', 'local') 
 });

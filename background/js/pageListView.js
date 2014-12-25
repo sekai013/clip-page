@@ -37,6 +37,7 @@ App.PageListView = Backbone.View.extend({
 		var $insertionPoint = this.$('.page-list-item-container');
 
 		this.pages.forEach(function(page) {
+			console.log(page);
 			var pageListItemView = new App.PageListItemView({
 				model: new App.Page(page)
 			});

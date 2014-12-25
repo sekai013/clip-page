@@ -3,6 +3,7 @@
 <head>
 	<meta charset = "utf-8">
 	<title></title>
+	<link rel="stylesheet" href="./css/bootstrap.css">
 	<script src="./js/lib/jquery-2.1.1.min.js"></script>
 	<script src="./js/lib/underscore.js"></script>
 	<script src="./js/lib/backbone.js"></script>
@@ -10,15 +11,23 @@
 	<script src="./js/dammy.js"></script>
 	<script src="./js/models.js"></script>
 	<script src="./js/container.js"></script>
+	<script src="./js/pageControlView.js"></script>
 	<script src="./js/pageView.js"></script>
 </head>
 <body>
 
-this is dammy page.
+<div id="header-container" class="text-center"></div>
 <div id="body-container"></div>
 
+<!-- Backbone.js template -->
+
+<script type="text/tamplate" id="page-control-view-template">
+	<h2><%= title %></h2>
+	<a href=<%= before %> class="btn btn-default">前のページ</a>
+	<a href=<%= next %> class="btn btn-default">次のページ</a>
+</script>
+
 <script type="text/tamplate" id="page-view-template">
-	<h1><%= title %></h1>
 	<%= body %>
 </script>
 

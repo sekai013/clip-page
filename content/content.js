@@ -3,7 +3,8 @@
 		var actions = {
 			clipPage: function() {
 				var title  = window.prompt('Enter title:');
-				var body   = document.body.innerHTML;
+				var body   = document.body;
+				var imageCollection = body.getElementsByTagName('img');
 				var linkCollection  = document.head.getElementsByTagName('link');
 				var styleCollection = document.head.getElementsByTagName('style');
 				var links = [], styles = [];
@@ -12,6 +13,11 @@
 					return;
 				}
 
+				for(var i = 0; i < imageCollection.length; i++) {
+					if(imageCollection[i].src) {
+						imageCollection[i].src = imageCollection[i].src; // change relative path of src property into abstract path
+					}
+				}
 				for(var i = 0; i < linkCollection.length; i++) {
 					links.push({
 						rel : linkCollection[i].rel,
@@ -28,7 +34,7 @@
 					action: 'savePage',
 					data: {
 						title : title,
-						body  : body,
+						body  : body.innerHTML,
 						links : links,
 						styles: styles,
 						notebookId: request.notebookId
