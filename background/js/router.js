@@ -1,11 +1,12 @@
 App.Router = Backbone.Router.extend({
 	routes: {
-		'clip-page'         : 'showClipPage',
-		'notebooks'         : 'showNotebooks',
-		'notebooks/:id/edit': 'showEditNotebook',
-		'notebooks/:id'     : 'showNotebookPages',
-		'new-notebook'      : 'showCreateNewNotebook',
-		'*actions'          : 'defaultRoute'
+		'clip-page'                : 'showClipPage',
+		'notebooks'                : 'showNotebooks',
+		'notebooks/:id/edit'       : 'showEditNotebook',
+		'notebooks/:id/:index/edit': 'showEditPage',
+		'notebooks/:id'            : 'showNotebookPages',
+		'new-notebook'             : 'showCreateNewNotebook',
+		'*actions'                 : 'defaultRoute'
 	},
 
 	showClipPage: function() {
@@ -66,6 +67,27 @@ App.Router = Backbone.Router.extend({
 		App.mainContainer.show(notebookFormView);
 	},
 
+	showEditPage: function(id, index) {
+		var notebook = App.notebookCollection.get(id);
+		var pageOption = notebook.get('pages')[index];
+		var pageFormView = new App.PageFormView({
+			model: new App.Page(pageOption)
+		})
+		var self = this;
+
+		pageFormView.on('submitForm', function(attributes) {
+			Object.keys(attributes).forEach(function(key) {
+				pageOption[key] = attributes[key];
+			});
+			notebook.get('pages').splice(index, 1, pageOption);
+			notebook.save();
+			self.navigate('notebooks/' + id);
+			self.showNotebookPages(id);
+		});
+
+		App.mainContainer.show(pageFormView);
+	},
+
 	showNotebookPages: function(id) {
 		var notebook = App.notebookCollection.get(id);
 		var pageListView = new App.PageListView({
@@ -79,8 +101,9 @@ App.Router = Backbone.Router.extend({
 		var notebookFormView = new App.NotebookFormView({
 			model: new App.Notebook()
 		});
+		var self = this;
 
-		notebookFormView.on('submit:form', function(attributes) {
+		notebookFormView.on('submitForm', function(attributes) {
 			var newNotebook = new App.Notebook({
 				title: attributes.title
 			});
@@ -89,6 +112,9 @@ App.Router = Backbone.Router.extend({
 			App.notebookCollection.each(function(notebook) {
 				notebook.save();
 			});
+
+			self.showNotebooks();
+			self.navigate('notebooks');
 		});
 		
 		App.mainContainer.show(notebookFormView);

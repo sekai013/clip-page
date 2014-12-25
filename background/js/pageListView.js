@@ -35,13 +35,14 @@ App.PageListView = Backbone.View.extend({
 
 	renderPage: function() {
 		var $insertionPoint = this.$('.page-list-item-container');
+		var self = this;
 
 		this.pages.forEach(function(page) {
-			console.log(page);
 			var pageListItemView = new App.PageListItemView({
 				model: new App.Page(page)
 			});
 
+			self.listenTo(pageListItemView, 'deletePage', self.render);
 			$insertionPoint.append(pageListItemView.render().$el);
 		});
 	},

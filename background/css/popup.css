@@ -14,7 +14,12 @@ div.notebook-title-header {
 	left    : 0px;
 }
 
-form#new-notebook-view-form {
+form#notebook-form {
+	position: relative;
+	margin  : 10px;
+}
+
+form#page-form {
 	position: relative;
 	margin  : 10px;
 }

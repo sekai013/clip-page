@@ -20,6 +20,7 @@
 	<script src="./js/pageListItemView.js"></script>
 	<script src="./js/pageListView.js"></script>
 	<script src="./js/notebookFormView.js"></script>
+	<script src="./js/pageFormView.js"></script>
 </head>
 <body>
 
@@ -43,7 +44,7 @@
 
 <script type="text/template" id="clip-page-view-template">
 		<div id="page-info">
-			<p><b><h5><%= title %></h5></b></p>
+			<p><b><h5><%- title %></h5></b></p>
 			<% if(clippable) { %>
 				<p><a href="<%= urlRaw %>" target="_blank"><%= urlShow %></a></p>
 			<% } else { %>
@@ -105,12 +106,12 @@
 				<a href="./dammy.html#<%= notebookId %>/<%= index %>" target="_blank"><%= title %></a>
 			</div>
 			<div class="col-xs-4 text-right">
-				<a href="#" class="btn btn-default btn-xs">
-					<span class="glyphicon glyphicon-edit btn-edit"></span>編集
+				<a href="#notebooks/<%= notebookId %>/<%= index %>/edit" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-edit"></span>編集
 				</a>
-				<a href="#" class="btn btn-danger btn-xs">
-					<span class="glyphicon glyphicon-remove btn-delete"></span>削除
-				</a>
+				<button href="#" class="btn btn-danger btn-xs btn-delete">
+					<span class="glyphicon glyphicon-remove"></span>削除
+				</button>
 			</div>
 	</td>
 </script>
@@ -131,11 +132,23 @@
 	<tbody class="page-list-item-container"></tbody>
 </script>
 
-<script type="text/template" id="new-notebook-view-template">
-	<form id="new-notebook-view-form">
+<script type="text/template" id="notebook-form-view-template">
+	<form id="notebook-form">
 		<label for="title">タイトル</label>
 		<input type="text" id="title" class="title" value="<%= title %>">
-		<input type="submit" id="submit" class="btn btn-default btn-sm" value="ノートブックを作成">
+		<% if(typeof id !== 'undefined') { %>
+			<input type="submit" id="submit" class="btn btn-default btn-sm" value="ノートブックを編集">
+		<% } else { %>
+			<input type="submit" id="submit" class="btn btn-default btn-sm" value="ノートブックを作成">
+		<% } %>
+	</form>
+</script>
+
+<script type="text/template" id="page-form-view-template">
+	<form id="page-form">
+		<label for="title">タイトル</label>
+		<input type="text" id="title" class="title" value="<%= title %>">
+		<input type="submit" id="submit" class="btn btn-default btn-sm" value="ページを編集">
 	</form>
 </script>
 

@@ -3,32 +3,9 @@ window.App = {};
 $(function() {
 	function initializeNotebooks() {
 		var notebookCollection = new App.NotebookCollection([{
-			title: '無題のノートブック',
-			pages: []
-		}, {
-			title: '無題のノートブック222',
+			title: 'マイノートブック',
 			pages: []
 		}]);
-
-		notebookCollection.each(function(notebook) {
-			notebook.save();
-		});
-
-		var id0 = notebookCollection.at(0).get('id');
-		var id1 = notebookCollection.at(1).get('id');
-		notebookCollection.at(0).set('pages', [{
-			title: 'testtitle',
-			body : 'testpage',
-			notebookId: id0,
-			index: 0
-		}]);
-		notebookCollection.at(1).set('pages', [{
-			title: 'testtitle',
-			body : 'testpage',
-			notebookId: id1,
-			index: 0
-		}]);
-
 		notebookCollection.each(function(notebook) {
 			notebook.save();
 		});
