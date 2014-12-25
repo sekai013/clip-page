@@ -1,13 +1,15 @@
-App.NewNotebookView = Backbone.View.extend({
+App.NotebookFormView = Backbone.View.extend({
 
 	events: {
 		'submit form': 'onSubmitForm'
 	},
 	
 	render: function() {
-		var html = $('#new-notebook-view-template').html();
+		var template = $('#new-notebook-view-template').html();
+		var compiled = _.template(template);
+		var html = compiled(this.model.toJSON());
 
-		this.$el.html(html);
+		this.$el.append(html);
 		return this;
 	},
 

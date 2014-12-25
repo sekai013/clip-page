@@ -18,15 +18,6 @@ App.Notebook = Backbone.Model.extend({
 	defaults: {
 		title: '',
 		pages: [],
-
-		// method for manipulating 'pages'
-		add: function(model) {
-			model.set('index', this.pages.length);
-			this.pages.push(model);
-		},
-		remove: function(index) {
-			this.pages.splice(index, 0);
-		}
 	},
 })
 

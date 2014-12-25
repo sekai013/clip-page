@@ -6,6 +6,14 @@ App.NotebookListItemView = Backbone.View.extend({
 	model: App.Notebook
 	 */
 
+	initialize: function() {
+		this.listenTo(this.model, 'destroy', this.remove);
+	},
+
+	events: {
+		'click .btn-delete': 'onClickDelete'
+	},
+
 	render: function() {
 		var template = $('#notebook-list-item-view-template').html();
 		var compiled = _.template(template);
@@ -13,5 +21,9 @@ App.NotebookListItemView = Backbone.View.extend({
 
 		this.$el.append(html);
 		return this;
+	},
+
+	onClickDelete: function() {
+		this.model.destroy();
 	}
 });

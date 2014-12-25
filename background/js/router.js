@@ -1,10 +1,11 @@
 App.Router = Backbone.Router.extend({
 	routes: {
-		'clip-page'    : 'showClipPage',
-		'notebooks'    : 'showNotebooks',
-		'notebooks/:id': 'showNotebookPages',
-		'new-notebook' : 'showCreateNewNotebook',
-		'*actions'     : 'defaultRoute'
+		'clip-page'         : 'showClipPage',
+		'notebooks'         : 'showNotebooks',
+		'notebooks/:id/edit': 'showEditNotebook',
+		'notebooks/:id'     : 'showNotebookPages',
+		'new-notebook'      : 'showCreateNewNotebook',
+		'*actions'          : 'defaultRoute'
 	},
 
 	showClipPage: function() {
@@ -48,6 +49,23 @@ App.Router = Backbone.Router.extend({
 		App.mainContainer.show(notebookListView);
 	},
 
+	showEditNotebook: function(id) {
+		var notebook = App.notebookCollection.get(id);
+		var notebookFormView = new App.NotebookFormView({
+			model: notebook
+		});
+		var self = this;
+
+		notebookFormView.on('submit:form', function(attributes) {
+			notebook.set('title', attributes.title);
+			notebook.save();
+			self.showNotebooks();
+			self.navigate('notebooks');
+		});
+		
+		App.mainContainer.show(notebookFormView);
+	},
+
 	showNotebookPages: function(id) {
 		var notebook = App.notebookCollection.get(id);
 		var pageListView = new App.PageListView({
@@ -58,9 +76,11 @@ App.Router = Backbone.Router.extend({
 	},
 
 	showCreateNewNotebook: function() {
-		var newNotebookView = new App.NewNotebookView();
+		var notebookFormView = new App.NotebookFormView({
+			model: new App.Notebook()
+		});
 
-		newNotebookView.on('submit:form', function(attributes) {
+		notebookFormView.on('submit:form', function(attributes) {
 			var newNotebook = new App.Notebook({
 				title: attributes.title
 			});
@@ -71,7 +91,7 @@ App.Router = Backbone.Router.extend({
 			});
 		});
 		
-		App.mainContainer.show(newNotebookView);
+		App.mainContainer.show(notebookFormView);
 	},
 
 	defaultRoute: function() {
