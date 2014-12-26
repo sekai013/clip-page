@@ -7,13 +7,6 @@ App.Page = Backbone.Model.extend({
 	}
 });
 
-/*
-App.PageCollection = Backbone.Collection.extend({
-	model: App.Page,
-	localStorage: new Backbone.LocalStorage('pageClip') 
-});
-*/
-
 App.Notebook = Backbone.Model.extend({
 	defaults: {
 		title: '',
