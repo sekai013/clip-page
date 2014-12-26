@@ -1,7 +1,7 @@
 {
 	"name": "ClipPage",
-	"description": "",
-	"version": "0.0.0",
+	"description": "Clip your favorite web pages and enjoy them offline",
+	"version": "0.1.0",
 	"author": "sekai013",
 	"permissions": [
 		"storage",
