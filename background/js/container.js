@@ -1,9 +1,5 @@
 App.Container = Backbone.View.extend({
 
-	/*
-	currentView
-	 */
-
 	destroy: function(view) {
 		if(!view) {
 			return;

@@ -1,7 +1,7 @@
 App.PageControlView = Backbone.View.extend({
 
 	/*
-	model: Page 
+	model: App.Page 
 	 */
 
 	render: function() {
